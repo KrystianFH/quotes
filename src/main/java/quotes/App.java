@@ -35,13 +35,13 @@ public class App {
 
         }
     }
-    class TypeDTO {
-        String author;
-        String text;
-    }
-    class ItemDTO{
-        String author;
-        String text;
-    }
+//    class TypeDTO {
+//        String author;
+//        String text;
+//    }
+//    class ItemDTO{
+//        String author;
+//        String text;
+//    }
 
 }

@@ -3,7 +3,14 @@
  */
 package quotes;
 
+import com.google.gson.Gson;
 import org.junit.Test;
+
+import java.io.FileReader;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static org.junit.Assert.*;
 
 public class AppTest {
@@ -11,4 +18,12 @@ public class AppTest {
         App classUnderTest = new App();
         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
     }
+//    @Test
+//    public void testSingleQuote() throws Exception{
+//        Gson quote = new Gson();
+//        Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/singleQuote.json"));
+//        System.out.println(reader.toString());
+//        Quote[] newQuote = quote.fromJson(reader, Quote[].class);
+//        assertEquals("Marilyn Monroe", newQuote.toString());
+//    }
 }
