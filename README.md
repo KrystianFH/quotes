@@ -17,4 +17,4 @@ Team:
 - Krystian Francuz-Harris
 - Leah Russo
 
-- Special thanks to Jack and Vij for helping us fix our scanner issues and showing me how to test!
+- Special thanks to Jack and Vij for helping us fix our scanner issues and showing me how to test! 
