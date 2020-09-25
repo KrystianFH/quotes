@@ -4,44 +4,62 @@
 package quotes;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public class App {
     public String getGreeting() {
         return "Hello world.";
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
         try {
             Gson gson = new Gson();
-
             Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/quotes.json"));
-
             Quote[] quote = gson.fromJson(reader, Quote[].class);
-
 
             int randomNum = (int)(Math.random() * quote.length);
             System.out.println(quote[randomNum]);
-
             reader.close();
 
             }catch (Exception ex) {
             ex.printStackTrace();
+        }
+
+
+        //get file from int method
+        Gson gson = new Gson();
+        URL url = new URL("http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String oneLine = input.readLine();
+        StringBuffer entireStringFromResponse = new StringBuffer();
+        while(oneLine != null){
+            entireStringFromResponse.append(oneLine);
+            oneLine = input.readLine();
 
         }
-    }
-    class TypeDTO {
-        String author;
-        String text;
-    }
-    class ItemDTO{
-        String author;
-        String text;
+        input.close();
+        QuoteFromInt randQuote = gson.fromJson(entireStringFromResponse.toString(), QuoteFromInt.class);
+        System.out.println(randQuote);
+
+
+
+        // file creator method
+        File infoFromInternet = new File("src/main/resources/infoFromInternet.json");
+        infoFromInternet.createNewFile();
+        FileWriter infoFileWriter = new FileWriter("src/main/resources/infoFromInternet.json");
+        gson.toJson(randQuote, infoFileWriter);
+        infoFileWriter.close();
+
+
+
     }
 
 }
